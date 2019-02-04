@@ -3,8 +3,6 @@ package pokemon.model;
 import java.util.ArrayList;
 
 public abstract class Pokemon
-{
-	public abstract class Pokemon
 	
 	{
 		private int healthPoints;
