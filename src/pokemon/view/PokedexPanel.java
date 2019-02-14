@@ -13,7 +13,7 @@ public class PokedexPanel extends JPanel
 	private SpringLayout appLayout;
 	private PokedexController appController;
 	private JButton changeButton;
-	private JComboBox<String> pokedexDropdoown;
+	private JComboBox<String> pokedexDropdown;
 	private JTextField numberField;
 	private JTextField nameField;
 	private JTextField evolveField;
@@ -29,6 +29,8 @@ public class PokedexPanel extends JPanel
 	private JLabel healthLabel;
 	private JLabel imageLabel;
 	
+	private ImageIcon pokemonIcon;
+	
 	
 	public PokedexPanel(PokedexController appController)
 	{
@@ -37,6 +39,7 @@ public class PokedexPanel extends JPanel
 		
 		this.appController = appController;
 		this.appLayout = new SpringLayout();
+		this.pokemonIcon = new ImageIcon(getClass().getResource("/pokemon/view/images/eevee.jpeg"));
 		
 		numberField = new JTextField("0");
 		nameField = new JTextField("My pokename");
@@ -51,7 +54,7 @@ public class PokedexPanel extends JPanel
 		attackLabel = new JLabel("This pokemon attack level is");
 		enhanceLabel = new JLabel("This pokemon enhancement level is");
 		nameLabel = new JLabel("My name is");
-		imageLabel = new JLabel("Pokemon goes here");
+		imageLabel = new JLabel("Pokemon goes here", pokemonIcon, JLabel.CENTER);
 		
 		changeButton = new JButton("Click here to change the pokevalues");
 		pokedexDropdown = new JComboBox<String>();
@@ -63,6 +66,7 @@ public class PokedexPanel extends JPanel
 	}
 	
 	private void setupPanel()
+
 	{
 		this.setLayout(appLayout);
 		this.setBackground(Color.orange);
@@ -83,16 +87,20 @@ public class PokedexPanel extends JPanel
 		this.add(enhancementField);
 		this.add(healthField);
 		
+		this.add(imageLabel);
+		imageLabel.setVerticalTextPosition(JLabel.BOTTOM);
+		imageLabel.setHorizontalTextPosition(JLabel.CENTER);
+		
 		this.add(changeButton);
 		this.add(pokedexDropdown);
 	}
+	
 	private void setupDropdown()
 	{
 		DefaultComboBoxModel<String> temp = new DefaultComboBoxModel<String>(appController.buildPokedexText());
 		pokedexDropdown.setModel(temp);
 	}
-	
-	
+
 	private void setupLayout()
 	{
 		
@@ -102,20 +110,51 @@ public class PokedexPanel extends JPanel
 	{
 		changeButton.addActionListener(new ActionListener()
 		{
-			public void ActionPerformed(ActionEvent click)
+			public void actionPerformed(ActionEvent click)
 			{
-			
+				sendDataToController();
 			}
 		});
 		
 		pokedexDropdown.addActionListener(new ActionListener()
 		{
-			public void ActionPerformed(ActionEvent click)
+			public void actionPerformed(ActionEvent click)
 			{
-				
+				String name = pokedexDropdown.getSelectedItem().toString();
+				changeImageDisplay(name);
 			}
 		});
 				
+	}
+	
+	private void sendDataToController()
+	{
+		int index = pokedexDropdown.getSelectedIndex();
+		
+		if(appController.isInt(attackField.getText()) && appController.isDouble(enhancementField.getText()) && appController.isInt(healthField.getText()))
+		{
+			String [] data = new String[5];
+			
+			//insert code here
+			appController.updatePokemon(index, data);
+		}
+	};
+	
+	private void changeImageDisplay(String name)
+	{
+		String path = "/pokemon/view/images/";
+		String defaultName = "EeveeImage1";
+		String extension = "jpeg";
+		try
+		{
+			pokemonIcon = new ImageIcon(getClass().getResource(path + name.toLowerCase() + extension));
+		}
+		catch (NullPointerException missingFile)
+		{
+			pokemonIcon = new ImageIcon(getClass().getResource(path + name.toLowerCase() + extension));
+		}
+		imageLabel.setIcon(pokemonIcon);;
+		repaint();
 	}
 
 }

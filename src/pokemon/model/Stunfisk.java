@@ -4,7 +4,7 @@ public class Stunfisk extends Pokemon implements Ground // implements Electric
 {
 	public Stunfisk(int number, String name)
 	{
-		super(number, name);
+		super(10, "Stunfisk");
 	}
 	
 	public void plow()
