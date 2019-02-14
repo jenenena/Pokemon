@@ -24,6 +24,7 @@ public class PokedexController
 	{
 		pokemonList.add(new Eevee());
 		pokemonList.add(new Squirtle());
+		pokemonList.add(new Mew());
 	}
 	
 	public void start()
