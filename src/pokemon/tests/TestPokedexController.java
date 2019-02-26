@@ -49,7 +49,6 @@ class TestPokedexController
 		assertTrue(evolveCount > 0, "At least one Pokemon must be evolveable");
 	}
 	
-	
 	@Test
 	void testValidationMethods()
 	{

@@ -2,7 +2,7 @@ package pokemon.model;
 
 public class Snorunt extends Pokemon implements Ice
 {
-	Snorunt()
+	public Snorunt()
 	{
 		super(10, "Snorunt");
 	}

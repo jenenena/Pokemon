@@ -1,5 +1,6 @@
 package pokemon.controller;
 
+import java.io.*;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -9,9 +10,9 @@ import pokemon.model.*;
 
 public class PokedexController
 {
+	private String saveFile = "backup.pokemon";
 	private ArrayList<Pokemon> pokemonList;
 	private PokedexFrame appFrame;
-	
 	
 	public PokedexController()
 	{
@@ -22,9 +23,12 @@ public class PokedexController
 	
 	private void addPokemon()
 	{
-		pokemonList.add(new Eevee());
+ 		pokemonList.add(new Eevee());
 		pokemonList.add(new Squirtle());
 		pokemonList.add(new Mew());
+		pokemonList.add(new Stunfisk());
+		pokemonList.add(new Snorunt());
+		pokemonList.add(new Sharky());
 	}
 	
 	public void start()
@@ -67,11 +71,6 @@ public class PokedexController
 		return appFrame;
 	}
 	
-	
-	
-	
-	
-	
 	public boolean isInt(String maybeInt)
 	{
 		boolean isValid = false;
@@ -87,7 +86,6 @@ public class PokedexController
 		}
 		return isValid;
 		}
-
 
 	public boolean isDouble(String maybeDouble)
 	{

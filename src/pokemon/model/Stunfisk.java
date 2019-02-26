@@ -2,9 +2,15 @@ package pokemon.model;
 
 public class Stunfisk extends Pokemon implements Ground, Electric
 {
+	public Stunfisk()
+	{
+		super(11, "Stunfisk");
+	}
+	
 	public Stunfisk(int number, String name)
 	{
 		super(10, "Stunfisk");
+		this.setCanEvolve(true);
 	}
 	
 	public void plow()
